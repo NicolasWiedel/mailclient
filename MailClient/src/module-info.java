@@ -6,5 +6,4 @@ module MailClient {
 	requires javafx.base;
 	
 	opens de.javadevblog.mailclient;
-	opens de.javadevblog.mailclient.controller;
 }

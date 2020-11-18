@@ -10,8 +10,10 @@ public class Launcher extends Application {
 	}
 	
 	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
+	public void start(Stage stage) throws Exception {
+
+
+		stage.show();
 		
 	}
 
