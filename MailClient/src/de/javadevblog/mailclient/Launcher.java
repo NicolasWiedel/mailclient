@@ -15,10 +15,10 @@ public class Launcher extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		Parent root = FXMLLoader.load(getClass().getResource("view/LoginWindow.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("view/MainWindow.fxml"));
 		
 		Scene scene = new Scene(root);
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.setScene(scene);
 		
 		stage.show();
