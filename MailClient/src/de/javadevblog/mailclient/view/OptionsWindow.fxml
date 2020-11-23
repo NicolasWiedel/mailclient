@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="372.0" prefWidth="489.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane prefHeight="372.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="148.0" layoutY="54.0" prefHeight="36.0" prefWidth="193.0" text="Optionen">
+      <Label alignment="CENTER" layoutX="148.0" layoutY="54.0" prefHeight="36.0" prefWidth="193.0" styleClass="big" text="Optionen">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 public class OptionsWindowController extends BaseController implements Initializable {
@@ -29,12 +30,15 @@ public class OptionsWindowController extends BaseController implements Initializ
 
     @FXML
     void btnApplyAction() {
-
+    	viewFactory.setColorTheme(cbThemePicker.getValue());
+    	viewFactory.setFontSize(FontSize.values()[(int)(sliderFontSize.getValue())]);
+    	viewFactory.updateStyles();
     }
 
     @FXML
     void btnCancelAction() {
-
+    	Stage stage = (Stage) cbThemePicker.getScene().getWindow();
+    	viewFactory.closeStage(stage);
     }
 
 	@Override

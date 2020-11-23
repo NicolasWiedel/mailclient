@@ -1,5 +1,7 @@
 package de.javadevblog.mailclient.view;
 
+import java.util.ArrayList;
+
 import de.javadevblog.mailclient.EmailManager;
 import de.javadevblog.mailclient.controller.BaseController;
 import de.javadevblog.mailclient.controller.LoginWindowController;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 public class ViewFactory {
 
 	private EmailManager emailManager;
+	private ArrayList<Stage> activeStages;
 	
 	// View options handling
 	private ColorTheme colorTheme = ColorTheme.DEFAULT;
@@ -20,6 +23,7 @@ public class ViewFactory {
 
 	public ViewFactory(EmailManager emailManager) {
 		this.emailManager = emailManager;
+		activeStages = new ArrayList<Stage>();
 	}
 	
 	public void showLoginWindow() {
@@ -66,10 +70,22 @@ public class ViewFactory {
 			stage.setResizable(false);
 		}
 		stage.show();
+		activeStages.add(stage);
+	}
+	
+	public void updateStyles() {
+		for(Stage stage : activeStages) {
+			Scene scene = stage.getScene();
+			// handle CSS
+			scene.getStylesheets().clear();
+			scene.getStylesheets().add(getClass().getResource(ColorTheme.getCSSPath(colorTheme)).toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(FontSize.getCSSPath(fontSize)).toExternalForm());
+		}
 	}
 	
 	public void closeStage(Stage stageToClose) {
 		stageToClose.close();
+		activeStages.remove(stageToClose);
 	}
 
 	public ColorTheme getColorTheme() {
