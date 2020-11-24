@@ -35,22 +35,23 @@ public class LoginWindowController extends BaseController {
     	if(fieldsAreValid()) {
     		EmailAccount emailAccount = new EmailAccount(tfMailAdress.getText(), pwfPassword.getText());
     		LoginService loginService = new LoginService(emailAccount, emailManager);
-    		EmailLoginReult emailLoginResult = loginService.login();
-    		
-    		switch (emailLoginResult) {
-			case SUCCESS: {
-				System.out.println("login successful!!!!" + emailAccount);
-				viewFactory.showMainWindow();
-		    	Stage stage = (Stage)lblError.getScene().getWindow();
-		    	viewFactory.closeStage(stage);
-				return;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + emailLoginResult);
-			}
-    	}
-    	
-    	
+    		loginService.start();
+    		loginService.setOnSucceeded(event -> {
+    			EmailLoginReult emailLoginResult = loginService.getValue();
+        		
+        		switch (emailLoginResult) {
+    			case SUCCESS: {
+    				System.out.println("login successful!!!!" + emailAccount);
+    				viewFactory.showMainWindow();
+    		    	Stage stage = (Stage)lblError.getScene().getWindow();
+    		    	viewFactory.closeStage(stage);
+    				return;
+    			}
+    			default:
+    				throw new IllegalArgumentException("Unexpected value: " + emailLoginResult);
+    			}
+    		});	
+    	}	
     }
 
 	private boolean fieldsAreValid() {
