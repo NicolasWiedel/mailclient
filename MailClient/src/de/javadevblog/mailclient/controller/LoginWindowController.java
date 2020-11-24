@@ -1,6 +1,8 @@
 package de.javadevblog.mailclient.controller;
 
 import de.javadevblog.mailclient.EmailManager;
+import de.javadevblog.mailclient.controller.services.LoginService;
+import de.javadevblog.mailclient.model.EmailAccount;
 import de.javadevblog.mailclient.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,11 +32,37 @@ public class LoginWindowController extends BaseController {
 
     @FXML
     void loginBtnAction() {
-    	System.out.println("login clicked!");
+    	if(fieldsAreValid()) {
+    		EmailAccount emailAccount = new EmailAccount(tfMailAdress.getText(), pwfPassword.getText());
+    		LoginService loginService = new LoginService(emailAccount, emailManager);
+    		EmailLoginReult emailLoginResult = loginService.login();
+    		
+    		switch (emailLoginResult) {
+			case SUCCESS: {
+				System.out.println("login successful!!!!" + emailAccount);
+				viewFactory.showMainWindow();
+		    	Stage stage = (Stage)lblError.getScene().getWindow();
+		    	viewFactory.closeStage(stage);
+				return;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + emailLoginResult);
+			}
+    	}
     	
-    	viewFactory.showMainWindow();
-    	Stage stage = (Stage)lblError.getScene().getWindow();
-    	viewFactory.closeStage(stage);
+    	
     }
+
+	private boolean fieldsAreValid() {
+		if(tfMailAdress.getText().isEmpty()) {
+			lblError.setText("Bitte geben Sie eine gültige Maladresse ein!");
+			return false;
+		}
+		if(pwfPassword.getText().isEmpty()) {
+			lblError.setText("Bitte geben Sie ein gültiges Passwort ein!");
+			return false;
+		}
+		return true;
+	}
 
 }
