@@ -1,17 +1,21 @@
 package de.javadevblog.mailclient.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import de.javadevblog.mailclient.EmailManager;
 import de.javadevblog.mailclient.controller.services.LoginService;
 import de.javadevblog.mailclient.model.EmailAccount;
 import de.javadevblog.mailclient.view.ViewFactory;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginWindowController extends BaseController {
+public class LoginWindowController extends BaseController implements Initializable {
 	
 	public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
 		super(emailManager, viewFactory, fxmlName);
@@ -40,13 +44,18 @@ public class LoginWindowController extends BaseController {
     			EmailLoginReult emailLoginResult = loginService.getValue();
         		
         		switch (emailLoginResult) {
-    			case SUCCESS: {
+    			case SUCCESS: 
     				System.out.println("login successful!!!!" + emailAccount);
     				viewFactory.showMainWindow();
     		    	Stage stage = (Stage)lblError.getScene().getWindow();
     		    	viewFactory.closeStage(stage);
     				return;
-    			}
+    			case FAILED_BY_CREDENTIALS:
+    				lblError.setText("unexpected error!");
+    				return;
+    			case FAILED_BY_UNEXPECTED_ERROR:
+    				lblError.setText("unexpected error!");
+    				return;
     			default:
     				throw new IllegalArgumentException("Unexpected value: " + emailLoginResult);
     			}
@@ -66,4 +75,9 @@ public class LoginWindowController extends BaseController {
 		return true;
 	}
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		tfMailAdress.setText("nicolaswiedel@java-devblog.de");
+		pwfPassword.setText("!Vio310567");
+	}
 }

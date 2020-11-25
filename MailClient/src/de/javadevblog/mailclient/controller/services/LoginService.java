@@ -38,6 +38,7 @@ public class LoginService extends Service<EmailLoginReult> {
 			store.connect(mailAccount.getProperties().getProperty("incomingHost"),
 					mailAccount.getAddress(), mailAccount.getPassword());
 			mailAccount.setStore(store);
+			emailManager.addEmailAccount(mailAccount);
 		} catch (NoSuchProviderException e) {
 			e.printStackTrace();
 			return EmailLoginReult.FAILED_BY_NETWORK;
