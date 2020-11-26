@@ -21,6 +21,19 @@ public class EmailAccount {
 		properties.put("mail.smtp.host", "send.one.com");
 		properties.put("mail.smtps.auth", "true");
 		properties.put("outgoingHost", "send.one.com");
+		
+
+//		properties.put("incomingHost", "imap.gmail.com");
+//		properties.put("mail.store.protocol", "imaps");
+//		properties.put("mail.imaps.port", "993");
+//		properties.put("mail.imaps.starttls.enable", "true");
+//		  
+//		properties.put("mail.smtp.host", "smtp.gmail.com");
+//		properties.put("mail.smtp.socketFactory.port", "465");
+//		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+//		properties.put("mail.smtp.auth", "true");
+//		properties.put("mail.smtp.port", "465");
+
 	}
 	
 	public String getAddress() {
