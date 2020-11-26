@@ -77,7 +77,5 @@ public class LoginWindowController extends BaseController implements Initializab
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		tfMailAdress.setText("nicolaswiedel@java-devblog.de");
-		tfMailAdress.setText("niciwiedel@gmail.com");
 	}
 }
